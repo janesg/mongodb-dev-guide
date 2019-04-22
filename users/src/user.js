@@ -13,7 +13,11 @@ const UserSchema = new Schema({
         }
     },
     likes: Number,
-    posts: [PostSchema]
+    posts: [PostSchema],        // Example of subdocuments
+    blogPosts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'blogPost'
+    }]
 });
 
 // Specifically use the keyword function when defining a getter rather

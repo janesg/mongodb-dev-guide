@@ -10,7 +10,14 @@ before((done) => {
 });
 
 beforeEach((done) => {
-    mongoose.connection.collections.users.drop(() => done());
+    // Mongo names collections using lowercase only
+    const { users, blogposts, comments } = mongoose.connection.collections;
+
+    users.drop(() => {
+        blogposts.drop(() => {
+            comments.drop(() => done());
+        });
+    });
 });
 
 after((done) => {
